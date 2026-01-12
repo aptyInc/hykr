@@ -46,8 +46,8 @@
         --gray-700: #44403c;
         --gray-800: #292524;
         --gray-900: #1c1917;
-        --font-display: "Space Grotesk", sans-serif;
-        --font-body: "Source Serif 4", Georgia, serif;
+        --font-display: Stacksansheadline, Georgia, sans-serif;
+        --font-body: Stacksanstext, Georgia, sans-serif;
       }
 
       * {
@@ -102,10 +102,11 @@
 
       .sidebar-logo {
         margin-bottom: 48px;
+        align-self: center;
       }
 
       .sidebar-logo img {
-        height: 32px;
+        height: 65px;
         width: auto;
       }
 
@@ -722,6 +723,23 @@
           justify-content: center;
         }
       }
+      @font-face {
+        font-family: Stacksansheadline;
+        src: url(https://cdn.prod.website-files.com/6941338100081de8fd7da9ac/69418d82bd65cfa8dd10c4e4_StackSansHeadline-VariableFont_wght.woff2)
+          format("woff2");
+        font-weight: 200 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: Stacksanstext;
+        src: url(https://cdn.prod.website-files.com/6941338100081de8fd7da9ac/69418d8282db6ade7d067a03_StackSansText-VariableFont_wght.woff2)
+          format("woff2");
+        font-weight: 200 700;
+        font-style: normal;
+        font-display: swap;
+      }
     </style>
   </head>
   <body>
@@ -735,7 +753,7 @@
         </div>
 
         <div class="sidebar-content">
-          <h1>Build Challenge 2026</h1>
+          <h1>The HyKr Build Challenge 2026</h1>
           <p class="sidebar-subtitle">
             Register your team for India's biggest startup challenge. Show us
             what you can build.
@@ -809,7 +827,8 @@
                 <label>Phone Number <span class="required">*</span></label>
                 <input type="tel" id="phone" placeholder="+91" required />
                 <span class="error-message"
-                  >Please enter your phone number</span
+                  >Please enter a valid phone number in this format +91
+                  1234567890</span
                 >
               </div>
             </div>
@@ -834,7 +853,7 @@
                   required
                 />
                 <span class="error-message"
-                  >Please enter your LinkedIn URL</span
+                  >Please enter a valid LinkedIn URL</span
                 >
               </div>
             </div>
@@ -1174,8 +1193,7 @@
             <div class="form-row single">
               <div class="form-group">
                 <label
-                  >Business Model Canvas (Publicly Accessible URL)<span
-                    class="required"
+                  >Business Model Canvas (Public URL)<span class="required"
                     >*</span
                   ></label
                 >
@@ -1183,10 +1201,10 @@
                   id="businessModelCanvas"
                   required
                   type="url"
-                  placeholder="https://www.businessmodelcanvas.com/..."
+                  placeholder="Ensure your link is viewable by anyone (Google Drive, Dropbox, etc.) "
                 />
                 <span class="error-message"
-                  >Please enter a valid publicly Accessible URL</span
+                  >Please enter a valid public URL</span
                 >
               </div>
             </div>
@@ -1288,10 +1306,16 @@
                   id="github"
                   placeholder="https://github.com/..."
                 />
+                <span class="error-message"
+                  >Please enter a valid GitHub or portfolio URL</span
+                >
               </div>
               <div class="form-group">
                 <label>Demo / Product Link</label>
                 <input type="url" id="demo" placeholder="https://..." />
+                <span class="error-message"
+                  >Please enter a valid demo or product URL</span
+                >
               </div>
             </div>
           </div>
@@ -1419,16 +1443,19 @@
               <div class="next-step-item">
                 <div class="next-step-number">1</div>
                 <div class="next-step-content">
-                  <h5>Application Review</h5>
-                  <p>Our team reviews all applications (1-2 weeks)</p>
+                  <h5>We review your application</h5>
+                  <p>Our team goes through all applications (1–2 weeks).</p>
                 </div>
               </div>
 
               <div class="next-step-item">
                 <div class="next-step-number">2</div>
                 <div class="next-step-content">
-                  <h5>Shortlist Announcement</h5>
-                  <p>100 teams will be selected to move forward</p>
+                  <h5>Find out if you’re in</h5>
+                  <p>
+                    We’ll let you know if you’ve been shortlisted for the build
+                    phase.
+                  </p>
                 </div>
               </div>
 
@@ -1436,7 +1463,9 @@
                 <div class="next-step-number">3</div>
                 <div class="next-step-content">
                   <h5>Build Phase</h5>
-                  <p>Shortlisted teams get 4 weeks to build their MVP</p>
+                  <p>
+                    Shortlisted teams work on and submit their MVP by March 1st.
+                  </p>
                 </div>
               </div>
 
@@ -1444,7 +1473,9 @@
                 <div class="next-step-number">4</div>
                 <div class="next-step-content">
                   <h5>Demo Day</h5>
-                  <p>Top 10 finalists present at the HyKr Studio launch</p>
+                  <p>
+                    Top 10 finalists present live at the HyKr Studio launch.
+                  </p>
                 </div>
               </div>
             </div>
@@ -1489,7 +1520,27 @@
           `.form-section[data-section="${step}"]`
         );
 
-        section.querySelectorAll("[required]").forEach((field) => {
+        const isValidEmail = (value) =>
+          /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        const isValidPhone = (value) => /^\+91\s\d{10}$/.test(value);
+        const isValidUrl = (value) => {
+          try {
+            const url = new URL(value);
+            return url.protocol === "https:";
+          } catch (error) {
+            return false;
+          }
+        };
+
+        const setFieldError = (field, hasError) => {
+          const group = field.closest(".form-group");
+          if (group) {
+            group.classList.toggle("has-error", hasError);
+          }
+          field.classList.toggle("error", hasError);
+        };
+
+        section.querySelectorAll("input, select, textarea").forEach((field) => {
           const group = field.closest(".form-group");
 
           if (field.type === "radio") {
@@ -1500,13 +1551,26 @@
             if (!checked) {
               isValid = false;
             }
-          } else if (!field.value.trim()) {
-            if (group) group.classList.add("has-error");
-            field.classList.add("error");
-            isValid = false;
           } else {
-            if (group) group.classList.remove("has-error");
-            field.classList.remove("error");
+            const value = field.value.trim();
+            let fieldValid = true;
+
+            if (field.hasAttribute("required") && !value) {
+              fieldValid = false;
+            } else if (value) {
+              if (field.type === "email") {
+                fieldValid = isValidEmail(value);
+              } else if (field.type === "tel") {
+                fieldValid = isValidPhone(value);
+              } else if (field.type === "url") {
+                fieldValid = isValidUrl(value);
+              }
+            }
+
+            setFieldError(field, !fieldValid);
+            if (!fieldValid) {
+              isValid = false;
+            }
           }
         });
 

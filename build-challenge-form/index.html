@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | HyKr Build Challenge 2026</title>
+    <meta
+      name="description"
+      content="Register your team for India's biggest startup challenge. ₹50 Lakhs in prizes, real products, real funding."
+    />
+    <link href="./favicon_dark.png" rel="shortcut icon" type="image/x-icon" />
+    <link
+      rel="icon"
+      href="./favicon_dark.png"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link
+      rel="icon"
+      href="./favicon_light.png"
+      media="(prefers-color-scheme: light)"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --deep-purple: #02225b;
+        --brand-blue: #2b39ff;
+        --orange-primary: #fa5b29;
+        --orange-light: #fc8348;
+        --yellow: #fce348;
+        --green: #10b981;
+        --red: #ef4444;
+        --white: #ffffff;
+        --off-white: #faf9f7;
+        --gray-50: #f8f7f6;
+        --gray-100: #f0eeec;
+        --gray-200: #e4e1dd;
+        --gray-300: #d1ccc5;
+        --gray-400: #a8a29e;
+        --gray-500: #78716c;
+        --gray-600: #57534e;
+        --gray-700: #44403c;
+        --gray-800: #292524;
+        --gray-900: #1c1917;
+        --font-display: "Space Grotesk", sans-serif;
+        --font-body: "Source Serif 4", Georgia, serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--font-body);
+        color: var(--gray-800);
+        background: var(--gray-900);
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: var(--font-display);
+        font-weight: 600;
+        line-height: 1.2;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* Layout */
+      .register-layout {
+        display: grid;
+        grid-template-columns: 400px 1fr;
+        min-height: 100vh;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        background: linear-gradient(180deg, #025899 0%, #02225b 100%);
+        padding: 48px 40px;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .sidebar-logo {
+        margin-bottom: 48px;
+      }
+
+      .sidebar-logo img {
+        height: 32px;
+        width: auto;
+      }
+
+      .sidebar-content {
+        flex: 1;
+      }
+
+      .sidebar h1 {
+        font-size: 2rem;
+        color: var(--white);
+        margin-bottom: 16px;
+        line-height: 1.3;
+      }
+
+      .sidebar-subtitle {
+        font-size: 1.05rem;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 40px;
+        line-height: 1.7;
+      }
+
+      /* Progress Steps */
+      .progress-steps {
+        margin-bottom: 40px;
+      }
+
+      .progress-step {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 24px;
+        position: relative;
+      }
+
+      .progress-step:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        left: 15px;
+        top: 32px;
+        width: 2px;
+        height: calc(100% - 8px);
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .progress-step.completed:not(:last-child)::after {
+        background: var(--green);
+      }
+
+      .progress-step-number {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-display);
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.5);
+        flex-shrink: 0;
+        position: relative;
+        z-index: 1;
+      }
+
+      .progress-step.active .progress-step-number {
+        background: var(--orange-primary);
+        border-color: var(--orange-primary);
+        color: var(--white);
+      }
+
+      .progress-step.completed .progress-step-number {
+        background: var(--green);
+        border-color: var(--green);
+        color: var(--white);
+      }
+
+      .progress-step-content h4 {
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.5);
+        margin-bottom: 2px;
+      }
+
+      .progress-step.active .progress-step-content h4,
+      .progress-step.completed .progress-step-content h4 {
+        color: var(--white);
+      }
+
+      .progress-step-content p {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      /* Sidebar Stats */
+      .sidebar-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        padding-top: 32px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .sidebar-stat {
+        text-align: center;
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+      }
+
+      .sidebar-stat-value {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--orange-primary);
+      }
+
+      .sidebar-stat-label {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.5);
+        margin-top: 4px;
+      }
+
+      /* Main Content */
+      .main-content {
+        background: var(--gray-50);
+        padding: 48px 64px;
+        overflow-y: auto;
+      }
+
+      .form-header {
+        margin-bottom: 40px;
+      }
+
+      .form-header h2 {
+        font-size: 1.75rem;
+        color: var(--gray-900);
+        margin-bottom: 8px;
+      }
+
+      .form-header p {
+        font-size: 1rem;
+        color: var(--gray-600);
+      }
+
+      /* Form Sections */
+      .form-section {
+        display: none;
+      }
+
+      .form-section.active {
+        display: block;
+      }
+
+      .form-card {
+        background: var(--white);
+        border-radius: 16px;
+        padding: 32px;
+        margin-bottom: 24px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      }
+
+      .form-card-title {
+        font-size: 1.1rem;
+        color: var(--gray-800);
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .form-card-title span {
+        font-size: 1.25rem;
+      }
+
+      /* Form Elements */
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .form-row.single {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group {
+        margin-bottom: 0;
+      }
+
+      .form-group label {
+        display: block;
+        font-family: var(--font-display);
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--gray-700);
+        margin-bottom: 8px;
+      }
+
+      .form-group label .required {
+        color: var(--red);
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 14px 16px;
+        font-family: var(--font-body);
+        font-size: 1rem;
+        color: var(--gray-800);
+        background: var(--gray-50);
+        border: 2px solid var(--gray-200);
+        border-radius: 10px;
+        transition: all 0.2s ease;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--deep-purple);
+        background: var(--white);
+        box-shadow: 0 0 0 4px rgba(35, 7, 89, 0.1);
+      }
+
+      .form-group input.error,
+      .form-group select.error,
+      .form-group textarea.error {
+        border-color: var(--red);
+      }
+
+      .form-group .error-message {
+        font-size: 0.8rem;
+        color: var(--red);
+        margin-top: 6px;
+        display: none;
+      }
+
+      .form-group.has-error .error-message {
+        display: block;
+      }
+
+      .form-group textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .form-group .hint {
+        font-size: 0.8rem;
+        color: var(--gray-500);
+        margin-top: 6px;
+      }
+
+      .char-count {
+        font-size: 0.75rem;
+        color: var(--gray-400);
+        text-align: right;
+        margin-top: 4px;
+      }
+
+      .char-count.warning {
+        color: var(--orange-primary);
+      }
+      .char-count.error {
+        color: var(--red);
+      }
+
+      /* Theme Selection */
+      .theme-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .theme-option {
+        position: relative;
+      }
+
+      .theme-option input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .theme-option label {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px;
+        background: var(--gray-50);
+        border: 2px solid var(--gray-200);
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-bottom: 0;
+      }
+
+      .theme-option label:hover {
+        border-color: var(--gray-300);
+      }
+
+      .theme-option input:checked + label {
+        background: rgba(35, 7, 89, 0.05);
+        border-color: var(--deep-purple);
+      }
+
+      .theme-option .theme-icon {
+        font-size: 1.5rem;
+      }
+
+      .theme-option .theme-name {
+        font-family: var(--font-display);
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--gray-800);
+      }
+
+      .theme-option .theme-category {
+        font-size: 0.7rem;
+        color: var(--gray-500);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      /* Role Selection */
+      .role-options {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+      }
+
+      .role-option {
+        position: relative;
+      }
+
+      .role-option input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .role-option label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        padding: 20px 16px;
+        background: var(--gray-50);
+        border: 2px solid var(--gray-200);
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: center;
+        margin-bottom: 0;
+      }
+
+      .role-option label:hover {
+        border-color: var(--gray-300);
+      }
+
+      .role-option input:checked + label {
+        background: rgba(35, 7, 89, 0.05);
+        border-color: var(--deep-purple);
+      }
+
+      .role-option .role-icon {
+        font-size: 2rem;
+      }
+
+      .role-option .role-name {
+        font-family: var(--font-display);
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--gray-800);
+      }
+
+      /* Checkbox */
+      .checkbox-group {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .checkbox-group input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        margin-top: 2px;
+        accent-color: var(--deep-purple);
+      }
+
+      .checkbox-group label {
+        font-size: 0.95rem;
+        color: var(--gray-700);
+        cursor: pointer;
+        margin-bottom: 0;
+      }
+
+      .checkbox-group label a {
+        color: var(--deep-purple);
+        text-decoration: underline;
+      }
+
+      /* Navigation Buttons */
+      .form-navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 32px;
+        padding-top: 32px;
+        border-top: 1px solid var(--gray-200);
+      }
+
+      .btn {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 14px 32px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(
+          135deg,
+          var(--orange-primary),
+          var(--orange-light)
+        );
+        color: var(--white);
+        box-shadow: 0 4px 16px rgba(250, 91, 41, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(250, 91, 41, 0.4);
+      }
+
+      .btn-secondary {
+        background: var(--white);
+        color: var(--gray-700);
+        border: 2px solid var(--gray-300);
+      }
+
+      .btn-secondary:hover {
+        border-color: var(--gray-400);
+      }
+
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      /* Success Page */
+      .success-content {
+        text-align: center;
+        padding: 60px 40px;
+      }
+
+      .success-icon {
+        width: 100px;
+        height: 100px;
+        background: var(--green);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 32px;
+        font-size: 3rem;
+        color: var(--white);
+        animation: scaleIn 0.5s ease;
+      }
+
+      @keyframes scaleIn {
+        0% {
+          transform: scale(0);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .success-content h2 {
+        font-size: 2rem;
+        color: var(--gray-900);
+        margin-bottom: 16px;
+      }
+
+      .success-content p {
+        font-size: 1.1rem;
+        color: var(--gray-600);
+        margin-bottom: 40px;
+      }
+
+      .next-steps {
+        background: var(--white);
+        border-radius: 16px;
+        padding: 32px;
+        text-align: left;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      .next-steps h4 {
+        font-size: 1rem;
+        color: var(--gray-800);
+        margin-bottom: 20px;
+      }
+
+      .next-step-item {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+
+      .next-step-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .next-step-number {
+        width: 28px;
+        height: 28px;
+        background: var(--gray-100);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-display);
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--gray-600);
+        flex-shrink: 0;
+      }
+
+      .next-step-content h5 {
+        font-size: 0.95rem;
+        color: var(--gray-800);
+        margin-bottom: 2px;
+      }
+
+      .next-step-content p {
+        font-size: 0.85rem;
+        color: var(--gray-500);
+        margin-bottom: 0;
+      }
+
+      /* Responsive */
+      @media (max-width: 1000px) {
+        .register-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          position: relative;
+          height: auto;
+          padding: 32px 24px;
+        }
+
+        .progress-steps {
+          display: flex;
+          overflow-x: auto;
+          gap: 24px;
+          padding-bottom: 16px;
+        }
+
+        .progress-step {
+          flex-shrink: 0;
+          margin-bottom: 0;
+        }
+
+        .progress-step::after {
+          display: none;
+        }
+
+        .sidebar-stats {
+          display: none;
+        }
+
+        .main-content {
+          padding: 32px 24px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+
+        .theme-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .role-options {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .form-navigation {
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .form-navigation .btn {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="register-layout">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-logo">
+          <a href="./index.html">
+            <img src="./logo.svg" alt="HyKr" />
+          </a>
+        </div>
+
+        <div class="sidebar-content">
+          <h1>Build Challenge 2026</h1>
+          <p class="sidebar-subtitle">
+            Register your team for India's biggest startup challenge. Show us
+            what you can build.
+          </p>
+
+          <div class="progress-steps">
+            <div class="progress-step active" data-step="1">
+              <div class="progress-step-number">1</div>
+              <div class="progress-step-content">
+                <h4>Team Info</h4>
+                <p>Basic details</p>
+              </div>
+            </div>
+            <div class="progress-step" data-step="2">
+              <div class="progress-step-number">2</div>
+              <div class="progress-step-content">
+                <h4>Your Idea</h4>
+                <p>Problem & solution</p>
+              </div>
+            </div>
+            <div class="progress-step" data-step="3">
+              <div class="progress-step-number">3</div>
+              <div class="progress-step-content">
+                <h4>Background</h4>
+                <p>Experience & links</p>
+              </div>
+            </div>
+            <div class="progress-step" data-step="4">
+              <div class="progress-step-number">4</div>
+              <div class="progress-step-content">
+                <h4>Review</h4>
+                <p>Confirm & submit</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Step 1: Team Info -->
+        <section class="form-section active" data-section="1">
+          <div class="form-header">
+            <h2>Tell us about your team</h2>
+            <p>Start with the basics. Who's building this?</p>
+          </div>
+
+          <div class="form-card">
+            <h3 class="form-card-title"><span>👤</span> Lead Founder</h3>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>First Name <span class="required">*</span></label>
+                <input type="text" id="firstName" required />
+                <span class="error-message">Please enter your first name</span>
+              </div>
+              <div class="form-group">
+                <label>Last Name <span class="required">*</span></label>
+                <input type="text" id="lastName" required />
+                <span class="error-message">Please enter your last name</span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Email <span class="required">*</span></label>
+                <input type="email" id="email" required />
+                <span class="error-message">Please enter a valid email</span>
+              </div>
+              <div class="form-group">
+                <label>Phone Number <span class="required">*</span></label>
+                <input type="tel" id="phone" placeholder="+91" required />
+                <span class="error-message"
+                  >Please enter your phone number</span
+                >
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>City <span class="required">*</span></label>
+                <input
+                  type="text"
+                  id="city"
+                  placeholder="e.g., Hyderabad"
+                  required
+                />
+                <span class="error-message">Please enter your city</span>
+              </div>
+              <div class="form-group">
+                <label>LinkedIn Profile <span class="required">*</span></label>
+                <input
+                  type="url"
+                  id="linkedin"
+                  placeholder="https://linkedin.com/in/..."
+                  required
+                />
+                <span class="error-message"
+                  >Please enter your LinkedIn URL</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h3 class="form-card-title"><span>👥</span> Team Details</h3>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Team Name <span class="required">*</span></label>
+                <input type="text" id="teamName" required />
+                <span class="error-message">Please enter your team name</span>
+              </div>
+              <div class="form-group">
+                <label>Team Size <span class="required">*</span></label>
+                <select id="teamSize" required>
+                  <option value="">Select...</option>
+                  <option value="1">Solo Founder</option>
+                  <option value="2">2 Members</option>
+                  <option value="3">3 Members</option>
+                  <option value="4">4 Members</option>
+                </select>
+                <span class="error-message">Please select team size</span>
+              </div>
+            </div>
+
+            <div class="form-row single">
+              <div class="form-group">
+                <label
+                  >Please list all team members, their roles, and what each
+                  person will be primarily responsible for in the team
+                  <span class="required">*</span></label
+                >
+                <textarea
+                  id="teamMembers"
+                  placeholder="Names, roles, responsibilities and LinkedIn profiles"
+                  required
+                ></textarea>
+                <span class="error-message">Please list all team members</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-navigation">
+            <div></div>
+            <button class="btn btn-primary" onclick="nextStep()">
+              Continue →
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 2: Your Idea -->
+        <section class="form-section" data-section="2">
+          <div class="form-header">
+            <h2>Tell us about your idea</h2>
+            <p>What problem are you solving and how?</p>
+          </div>
+
+          <div class="form-card">
+            <h3 class="form-card-title"><span>🎯</span> Challenge Theme</h3>
+
+            <div class="form-group">
+              <label>Select your theme <span class="required">*</span></label>
+              <div class="theme-grid">
+                <div class="theme-option">
+                  <input
+                    type="radio"
+                    name="theme"
+                    id="theme1"
+                    value="ai-agents"
+                    required
+                  />
+                  <label for="theme1">
+                    <span class="theme-icon">🤖</span>
+                    <div>
+                      <div class="theme-name">AI Agents for Enterprise</div>
+                      <div class="theme-category">Deep Tech</div>
+                    </div>
+                  </label>
+                </div>
+                <div class="theme-option">
+                  <input
+                    type="radio"
+                    name="theme"
+                    id="theme2"
+                    value="dev-tools"
+                  />
+                  <label for="theme2">
+                    <span class="theme-icon">💻</span>
+                    <div>
+                      <div class="theme-name">
+                        Developer Tools & Infrastructure
+                      </div>
+                      <div class="theme-category">Deep Tech</div>
+                    </div>
+                  </label>
+                </div>
+                <div class="theme-option">
+                  <input
+                    type="radio"
+                    name="theme"
+                    id="theme3"
+                    value="edge-ai"
+                  />
+                  <label for="theme3">
+                    <span class="theme-icon">📱</span>
+                    <div>
+                      <div class="theme-name">
+                        Edge AI & On-Device Intelligence
+                      </div>
+                      <div class="theme-category">Deep Tech</div>
+                    </div>
+                  </label>
+                </div>
+                <div class="theme-option">
+                  <input
+                    type="radio"
+                    name="theme"
+                    id="theme4"
+                    value="robotics"
+                  />
+                  <label for="theme4">
+                    <span class="theme-icon">🦾</span>
+                    <div>
+                      <div class="theme-name">Robotics & Automation</div>
+                      <div class="theme-category">Deep Tech</div>
+                    </div>
+                  </label>
+                </div>
+                <div class="theme-option">
+                  <input
+                    type="radio"
+                    name="theme"
+                    id="theme5"
+                    value="data-infra"
+                  />
+                  <label for="theme5">
+                    <span class="theme-icon">📊</span>
+                    <div>
+                      <div class="theme-name">Data Infrastructure & MLOps</div>
+                      <div class="theme-category">Deep Tech</div>
+                    </div>
+                  </label>
+                </div>
+                <div class="theme-option">
+                  <input
+                    type="radio"
+                    name="theme"
+                    id="theme6"
+                    value="diagnostics"
+                  />
+                  <label for="theme6">
+                    <span class="theme-icon">🏥</span>
+                    <div>
+                      <div class="theme-name">
+                        Digital Diagnostics & Imaging
+                      </div>
+                      <div class="theme-category">Health & Bio</div>
+                    </div>
+                  </label>
+                </div>
+                <div class="theme-option">
+                  <input
+                    type="radio"
+                    name="theme"
+                    id="theme7"
+                    value="healthcare-workflow"
+                  />
+                  <label for="theme7">
+                    <span class="theme-icon">⚕️</span>
+                    <div>
+                      <div class="theme-name">
+                        Healthcare Workflow & Operations
+                      </div>
+                      <div class="theme-category">Health & Bio</div>
+                    </div>
+                  </label>
+                </div>
+                <div class="theme-option">
+                  <input
+                    type="radio"
+                    name="theme"
+                    id="theme8"
+                    value="digital-therapeutics"
+                  />
+                  <label for="theme8">
+                    <span class="theme-icon">🧠</span>
+                    <div>
+                      <div class="theme-name">
+                        Digital Therapeutics & Mental Health
+                      </div>
+                      <div class="theme-category">Health & Bio</div>
+                    </div>
+                  </label>
+                </div>
+                <div class="theme-option">
+                  <input
+                    type="radio"
+                    name="theme"
+                    id="theme9"
+                    value="construction-tech"
+                  />
+                  <label for="theme9">
+                    <span class="theme-icon">🏗️</span>
+                    <div>
+                      <div class="theme-name">Construction Tech</div>
+                      <div class="theme-category">Construction</div>
+                    </div>
+                  </label>
+                </div>
+                <div class="theme-option">
+                  <input
+                    type="radio"
+                    name="theme"
+                    id="theme10"
+                    value="sustainable"
+                  />
+                  <label for="theme10">
+                    <span class="theme-icon">🌱</span>
+                    <div>
+                      <div class="theme-name">
+                        Sustainable Built Environment
+                      </div>
+                      <div class="theme-category">Construction</div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h3 class="form-card-title"><span>💡</span> Problem & Solution</h3>
+
+            <div class="form-row single">
+              <div class="form-group">
+                <label
+                  >What problem are you solving?
+                  <span class="required">*</span></label
+                >
+                <textarea
+                  id="problem"
+                  maxlength="300"
+                  required
+                  placeholder="Describe the problem, Be specific about who has this problem and why it matters."
+                ></textarea>
+                <div class="char-count">
+                  <span id="problemCount">0</span>/300
+                </div>
+                <span class="error-message">Please describe the problem</span>
+              </div>
+            </div>
+
+            <div class="form-row single">
+              <div class="form-group">
+                <label
+                  >What's your solution? <span class="required">*</span></label
+                >
+                <textarea
+                  id="solution"
+                  maxlength="300"
+                  required
+                  placeholder="Describe your solution, What are you building and how does it work?"
+                ></textarea>
+                <div class="char-count">
+                  <span id="solutionCount">0</span>/300
+                </div>
+                <span class="error-message">Please describe your solution</span>
+              </div>
+            </div>
+
+            <div class="form-row single">
+              <div class="form-group">
+                <label
+                  >Why are you the right team to build this?
+                  <span class="required">*</span></label
+                >
+                <textarea
+                  id="whyYou"
+                  maxlength="300"
+                  required
+                  placeholder="What unique insight, experience, or access do you have?"
+                ></textarea>
+                <div class="char-count">
+                  <span id="whyYouCount">0</span>/300
+                </div>
+                <span class="error-message"
+                  >Please tell us why you're the right team</span
+                >
+              </div>
+            </div>
+
+            <div class="form-row single">
+              <div class="form-group">
+                <label
+                  >Who do you see as your primary target customer?
+                  <span class="required">*</span></label
+                >
+                <textarea
+                  id="primaryTargetCustomer"
+                  maxlength="300"
+                  required
+                  placeholder="Be as specific as possible"
+                ></textarea>
+                <div class="char-count">
+                  <span id="primaryTargetCustomerCount">0</span>/300
+                </div>
+                <span class="error-message"
+                  >Please tell us who your primary target customer is</span
+                >
+              </div>
+            </div>
+
+            <div class="form-row single">
+              <div class="form-group">
+                <label
+                  >Why do you believe customers will choose your solution over
+                  existing options? <span class="required">*</span></label
+                >
+                <textarea
+                  id="whyCustomersChoose"
+                  maxlength="300"
+                  required
+                  placeholder="Be as specific as possible"
+                ></textarea>
+                <div class="char-count">
+                  <span id="whyCustomersChooseCount">0</span>/300
+                </div>
+                <span class="error-message"
+                  >Please tell us why customers will choose your solution over
+                  existing options</span
+                >
+              </div>
+            </div>
+
+            <div class="form-row single">
+              <div class="form-group">
+                <label
+                  >Business Model Canvas (Publicly Accessible URL)<span
+                    class="required"
+                    >*</span
+                  ></label
+                >
+                <input
+                  id="businessModelCanvas"
+                  required
+                  type="url"
+                  placeholder="https://www.businessmodelcanvas.com/..."
+                />
+                <span class="error-message"
+                  >Please enter a valid publicly Accessible URL</span
+                >
+              </div>
+            </div>
+
+            <div class="form-row single">
+              <div class="form-group">
+                <label>Is there anything else you would like us to know?</label>
+                <textarea
+                  id="anythingElse"
+                  maxlength="300"
+                  placeholder="Anything else you would like us to know"
+                ></textarea>
+                <div class="char-count">
+                  <span id="anythingElseCount">0</span>/300
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-navigation">
+            <button class="btn btn-secondary" onclick="prevStep()">
+              ← Back
+            </button>
+            <button class="btn btn-primary" onclick="nextStep()">
+              Continue →
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 3: Background -->
+        <section class="form-section" data-section="3">
+          <div class="form-header">
+            <h2>Your background</h2>
+            <p>
+              Help us understand your experience and what you've built before.
+            </p>
+          </div>
+
+          <div class="form-card">
+            <h3 class="form-card-title"><span>🎓</span> Current Status</h3>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Current Status <span class="required">*</span></label>
+                <select id="status" required>
+                  <option value="">Select...</option>
+                  <option value="Employed, planning to leave">
+                    Employed, planning to leave
+                  </option>
+                  <option value="Employed, working on this as a side project">
+                    Employed, working on this as a side project
+                  </option>
+                  <option value="Full-time founder">Full-time founder</option>
+                  <option value="Student">Student</option>
+                  <option value="Between roles">Between roles</option>
+                  <option value="Other">Other</option>
+                </select>
+                <span class="error-message">Please select your status</span>
+              </div>
+              <div class="form-group">
+                <label>Your Superpower <span class="required">*</span></label>
+                <select id="superpower" required>
+                  <option value="">Select...</option>
+                  <option value="Technical / Engineering">
+                    Technical / Engineering
+                  </option>
+                  <option value="Product / Design">Product / Design</option>
+                  <option value="Business sales">Business sales</option>
+                  <option value="Domain Expert">Domain Expert</option>
+                  <option value="Other">Other</option>
+                </select>
+                <span class="error-message">Please select your superpower</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h3 class="form-card-title"><span>🔗</span> Previous Work</h3>
+
+            <div class="form-row single">
+              <div class="form-group">
+                <label>Have you built anything before?</label>
+                <textarea
+                  id="previousWork"
+                  placeholder="Tell us about projects, products, or startups you've built. Include links if available."
+                ></textarea>
+                <span class="hint"
+                  >GitHub repos, live products, portfolio—anything that shows
+                  you can build</span
+                >
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>GitHub / Portfolio URL</label>
+                <input
+                  type="url"
+                  id="github"
+                  placeholder="https://github.com/..."
+                />
+              </div>
+              <div class="form-group">
+                <label>Demo / Product Link</label>
+                <input type="url" id="demo" placeholder="https://..." />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h3 class="form-card-title">
+              <span>📣</span> How did you hear about us?
+            </h3>
+
+            <div class="form-row single">
+              <div class="form-group">
+                <label>Referral Source <span class="required">*</span></label>
+                <select id="referralSource" required>
+                  <option value="">Select...</option>
+                  <option value="Instagram">Instagram</option>
+                  <option value="LinkedIn">LinkedIn</option>
+                  <option value="News / Media">News / Media</option>
+                  <option value="Referral / Friend">Referral / Friend</option>
+                  <option value="Twitter / X">Twitter / X</option>
+                  <option value="University / College">
+                    University / College
+                  </option>
+                  <option value="Other">Other</option>
+                </select>
+                <span class="error-message"
+                  >Please select your referral source</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="form-navigation">
+            <button class="btn btn-secondary" onclick="prevStep()">
+              ← Back
+            </button>
+            <button class="btn btn-primary" onclick="nextStep()">
+              Review Application →
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 4: Review -->
+        <section class="form-section" data-section="4">
+          <div class="form-header">
+            <h2>Review your application</h2>
+            <p>Make sure everything looks good before submitting.</p>
+          </div>
+
+          <div class="form-card">
+            <h3 class="form-card-title"><span>👤</span> Team Information</h3>
+            <div id="reviewTeam"></div>
+          </div>
+
+          <div class="form-card">
+            <h3 class="form-card-title"><span>💡</span> Your Idea</h3>
+            <div id="reviewIdea"></div>
+          </div>
+
+          <div class="form-card">
+            <h3 class="form-card-title"><span>🎓</span> Background</h3>
+            <div id="reviewBackground"></div>
+          </div>
+
+          <div class="form-card">
+            <h3 class="form-card-title"><span>✅</span> Terms & Conditions</h3>
+
+            <div class="checkbox-group">
+              <input type="checkbox" id="termsAccept" required />
+              <label for="termsAccept"
+                >I agree to the
+                <a
+                  href="https://docs.google.com/document/d/1mw3NGNiItoYV95OtnDmJL2k8hGBGgBpKur36gJTpm0A/edit?tab=t.0#heading=h.vwp8cv4u9grf"
+                  target="_blank"
+                  >Terms & Conditions</a
+                >
+                and
+                <a
+                  href="https://docs.google.com/document/d/1PpsiLXSnCTmnpj9dHVigCEV08ljtxrW6vU20W_TZ1js/edit?tab=t.0#heading=h.5cnhwm36jgno"
+                  target="_blank"
+                  >Privacy Policy</a
+                ></label
+              >
+            </div>
+
+            <div class="checkbox-group">
+              <input type="checkbox" id="commitmentAccept" required />
+              <label for="commitmentAccept"
+                >I confirm that I/we can commit to building a working product if
+                shortlisted</label
+              >
+            </div>
+
+            <div class="checkbox-group">
+              <input type="checkbox" id="eligibilityAccept" required />
+              <label for="eligibilityAccept"
+                >I confirm that at least one team member is based in
+                India</label
+              >
+            </div>
+          </div>
+
+          <div class="form-navigation">
+            <button class="btn btn-secondary" onclick="prevStep()">
+              ← Back
+            </button>
+            <button class="btn btn-primary" onclick="submitForm()">
+              🚀 Submit Application
+            </button>
+          </div>
+        </section>
+
+        <!-- Success -->
+        <section class="form-section" data-section="5">
+          <div class="success-content">
+            <div class="success-icon">✓</div>
+            <h2>Application Submitted!</h2>
+            <p>
+              Thank you for applying to the HyKr Build Challenge 2026. We'll
+              review your application and get back to you within 2 weeks.
+            </p>
+
+            <div class="next-steps">
+              <h4>What happens next?</h4>
+
+              <div class="next-step-item">
+                <div class="next-step-number">1</div>
+                <div class="next-step-content">
+                  <h5>Application Review</h5>
+                  <p>Our team reviews all applications (1-2 weeks)</p>
+                </div>
+              </div>
+
+              <div class="next-step-item">
+                <div class="next-step-number">2</div>
+                <div class="next-step-content">
+                  <h5>Shortlist Announcement</h5>
+                  <p>100 teams will be selected to move forward</p>
+                </div>
+              </div>
+
+              <div class="next-step-item">
+                <div class="next-step-number">3</div>
+                <div class="next-step-content">
+                  <h5>Build Phase</h5>
+                  <p>Shortlisted teams get 4 weeks to build their MVP</p>
+                </div>
+              </div>
+
+              <div class="next-step-item">
+                <div class="next-step-number">4</div>
+                <div class="next-step-content">
+                  <h5>Demo Day</h5>
+                  <p>Top 10 finalists present at the HyKr Studio launch</p>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: 40px">
+              <a href="./index.html" class="btn btn-primary"
+                >← Back to Challenge</a
+              >
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      let currentStep = 1;
+      const totalSteps = 4;
+
+      function updateProgress() {
+        document.querySelectorAll(".progress-step").forEach((step, index) => {
+          const stepNum = index + 1;
+          step.classList.remove("active", "completed");
+
+          if (stepNum < currentStep) {
+            step.classList.add("completed");
+          } else if (stepNum === currentStep) {
+            step.classList.add("active");
+          }
+        });
+
+        document.querySelectorAll(".form-section").forEach((section, index) => {
+          section.classList.remove("active");
+          if (index + 1 === currentStep) {
+            section.classList.add("active");
+          }
+        });
+      }
+
+      function validateStep(step) {
+        let isValid = true;
+        const section = document.querySelector(
+          `.form-section[data-section="${step}"]`
+        );
+
+        section.querySelectorAll("[required]").forEach((field) => {
+          const group = field.closest(".form-group");
+
+          if (field.type === "radio") {
+            const name = field.name;
+            const checked = section.querySelector(
+              `input[name="${name}"]:checked`
+            );
+            if (!checked) {
+              isValid = false;
+            }
+          } else if (!field.value.trim()) {
+            if (group) group.classList.add("has-error");
+            field.classList.add("error");
+            isValid = false;
+          } else {
+            if (group) group.classList.remove("has-error");
+            field.classList.remove("error");
+          }
+        });
+
+        return isValid;
+      }
+
+      function nextStep() {
+        if (!validateStep(currentStep)) {
+          return;
+        }
+
+        if (currentStep < totalSteps) {
+          currentStep++;
+          updateProgress();
+          window.scrollTo(0, 0);
+
+          if (currentStep === 4) {
+            populateReview();
+          }
+        }
+      }
+
+      function prevStep() {
+        if (currentStep > 1) {
+          currentStep--;
+          updateProgress();
+          window.scrollTo(0, 0);
+        }
+      }
+
+      function populateReview() {
+        const teamReview = document.getElementById("reviewTeam");
+        const ideaReview = document.getElementById("reviewIdea");
+        const backgroundReview = document.getElementById("reviewBackground");
+
+        const formData = collectFormData();
+
+        teamReview.innerHTML = `
+                <p style="margin-bottom: 8px;"><strong>Lead Founder:</strong> ${
+                  formData.firstName
+                } ${formData.lastName}</p>
+                <p style="margin-bottom: 8px;"><strong>Email:</strong> ${
+                  formData.email
+                }</p>
+                <p style="margin-bottom: 8px;"><strong>Phone:</strong> ${
+                  formData.phone
+                }</p>
+                <p style="margin-bottom: 8px;"><strong>City:</strong> ${
+                  formData.city
+                }</p>
+                <p style="margin-bottom: 8px;"><strong>LinkedIn:</strong> ${
+                  formData.linkedin
+                }</p>
+                <p style="margin-bottom: 8px;"><strong>Team:</strong> ${
+                  formData.teamName
+                } (${formData.teamSize} member${
+          formData.teamSize == "1" ? "" : "s"
+        })</p>
+            `;
+
+        ideaReview.innerHTML = `
+                <p style="margin-bottom: 8px;"><strong>Theme:</strong> ${formData.themeName}</p>
+                <p style="margin-bottom: 8px;"><strong>Problem:</strong> ${formData.problem}</p>
+                <p><strong>Solution:</strong> ${formData.solution}</p>
+                <p style="margin-bottom: 8px;"><strong>Why You:</strong> ${formData.whyYou}</p>
+                <p><strong>Primary Target Customer:</strong> ${formData.primaryTargetCustomer}</p>
+                <p><strong>Why Customers Choose:</strong> ${formData.whyCustomersChoose}</p>
+                <p><strong>Business Model Canvas:</strong> ${formData.businessModelCanvas}</p>
+                <p><strong>Anything Else:</strong> ${formData.anythingElse}</p>
+            `;
+
+        backgroundReview.innerHTML = `
+                <p style="margin-bottom: 8px;"><strong>Status:</strong> ${formData.status}</p>
+                <p style="margin-bottom: 8px;"><strong>Superpower:</strong> ${formData.superpower}</p>
+                <p><strong>Previous Work:</strong> ${formData.previousWork}</p>
+                <p><strong>GitHub:</strong> ${formData.github}</p>
+                <p><strong>Demo / Product Link:</strong> ${formData.demo}</p>
+                <p><strong>Referral Source:</strong> ${formData.referralSource}</p>
+            `;
+      }
+
+      function collectFormData() {
+        const theme = document.querySelector('input[name="theme"]:checked');
+        const themeName = theme
+          ? theme.closest(".theme-option").querySelector(".theme-name")
+              .textContent
+          : "";
+        const themeValue = theme ? theme.value : "";
+
+        return {
+          // Lead Founder Info
+          firstName: document.getElementById("firstName").value,
+          lastName: document.getElementById("lastName").value,
+          email: document.getElementById("email").value,
+          phone: document.getElementById("phone").value || "",
+          linkedin: document.getElementById("linkedin").value,
+          city: document.getElementById("city").value,
+
+          // Team Details
+          teamName: document.getElementById("teamName").value,
+          teamSize: document.getElementById("teamSize").value,
+          teamMembers: document.getElementById("teamMembers").value || "",
+
+          // Idea
+          theme: themeValue,
+          themeName: themeName,
+          problem: document.getElementById("problem").value,
+          solution: document.getElementById("solution").value,
+          whyYou: document.getElementById("whyYou").value,
+          primaryTargetCustomer:
+            document.getElementById("primaryTargetCustomer").value || "",
+          whyCustomersChoose:
+            document.getElementById("whyCustomersChoose").value || "",
+          businessModelCanvas:
+            document.getElementById("businessModelCanvas").value || "",
+          anythingElse: document.getElementById("anythingElse").value || "",
+
+          // Background
+          status: document.getElementById("status").value,
+          superpower: document.getElementById("superpower").value,
+          previousWork: document.getElementById("previousWork").value || "",
+          github: document.getElementById("github").value || "",
+          demo: document.getElementById("demo").value || "",
+          referralSource: document.getElementById("referralSource").value || "",
+
+          // Terms
+          termsAccepted: document.getElementById("termsAccept").checked,
+          commitmentAccepted:
+            document.getElementById("commitmentAccept").checked,
+          eligibilityAccepted:
+            document.getElementById("eligibilityAccept").checked,
+
+          // Timestamp
+          submittedAt: new Date().toISOString(),
+        };
+      }
+
+      async function submitForm() {
+        const termsAccept = document.getElementById("termsAccept").checked;
+        const commitmentAccept =
+          document.getElementById("commitmentAccept").checked;
+        const eligibilityAccept =
+          document.getElementById("eligibilityAccept").checked;
+
+        if (!termsAccept || !commitmentAccept || !eligibilityAccept) {
+          alert("Please accept all terms and conditions to submit.");
+          return;
+        }
+
+        // Replace with your Zapier Webhook URL
+        const ZAPIER_WEBHOOK_URL =
+          "https://hooks.zapier.com/hooks/catch/20662197/uwzzk2o/";
+
+        // Check if Zapier webhook URL is configured
+        if (ZAPIER_WEBHOOK_URL === "YOUR_ZAPIER_WEBHOOK_URL_HERE") {
+          alert(
+            "Error: Zapier webhook URL not configured. Please set ZAPIER_WEBHOOK_URL in the script."
+          );
+          return;
+        }
+
+        // Get submit button and disable it
+        const submitButton = document.querySelector(
+          'button[onclick="submitForm()"]'
+        );
+        const originalButtonText = submitButton.innerHTML;
+        submitButton.disabled = true;
+        submitButton.innerHTML = "⏳ Submitting...";
+
+        try {
+          // Collect all form data
+          const formData = collectFormData();
+
+          // Send to Zapier
+          const response = await fetch(ZAPIER_WEBHOOK_URL, {
+            method: "POST",
+            headers: {},
+            body: JSON.stringify(formData),
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const result = await response.json().catch(() => ({})); // Zapier may return empty response
+
+          // Success - move to success page
+          currentStep = 5;
+          updateProgress();
+          window.scrollTo(0, 0);
+        } catch (error) {
+          console.error("Error submitting form:", error);
+          alert(
+            "Failed to submit application. Please try again or contact support if the problem persists."
+          );
+
+          // Re-enable button
+          submitButton.disabled = false;
+          submitButton.innerHTML = originalButtonText;
+        }
+      }
+
+      // Character counters
+      document.querySelectorAll("textarea[maxlength]").forEach((textarea) => {
+        const countId = textarea.id + "Count";
+        const countEl = document.getElementById(countId);
+
+        if (countEl) {
+          textarea.addEventListener("input", () => {
+            const count = textarea.value.length;
+            const max = parseInt(textarea.getAttribute("maxlength"));
+            countEl.textContent = count;
+
+            const parent = countEl.closest(".char-count");
+            parent.classList.remove("warning", "error");
+
+            if (count >= max) {
+              parent.classList.add("error");
+            } else if (count >= max * 0.8) {
+              parent.classList.add("warning");
+            }
+          });
+        }
+      });
+
+      // Initialize
+      updateProgress();
+    </script>
+  </body>
+</html>

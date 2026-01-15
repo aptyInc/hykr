@@ -102,7 +102,6 @@
 
       .sidebar-logo {
         margin-bottom: 48px;
-        align-self: center;
       }
 
       .sidebar-logo img {
@@ -1097,12 +1096,11 @@
                 >
                 <textarea
                   id="problem"
-                  maxlength="300"
                   required
                   placeholder="Describe the problem, Be specific about who has this problem and why it matters."
                 ></textarea>
                 <div class="char-count">
-                  <span id="problemCount">0</span>/300
+                  <span id="problemCount">0</span> words / 300 words
                 </div>
                 <span class="error-message">Please describe the problem</span>
               </div>
@@ -1115,12 +1113,11 @@
                 >
                 <textarea
                   id="solution"
-                  maxlength="300"
                   required
                   placeholder="Describe your solution, What are you building and how does it work?"
                 ></textarea>
                 <div class="char-count">
-                  <span id="solutionCount">0</span>/300
+                  <span id="solutionCount">0</span> words / 300 words
                 </div>
                 <span class="error-message">Please describe your solution</span>
               </div>
@@ -1134,12 +1131,11 @@
                 >
                 <textarea
                   id="whyYou"
-                  maxlength="300"
                   required
                   placeholder="What unique insight, experience, or access do you have?"
                 ></textarea>
                 <div class="char-count">
-                  <span id="whyYouCount">0</span>/300
+                  <span id="whyYouCount">0</span> words / 300 words
                 </div>
                 <span class="error-message"
                   >Please tell us why you're the right team</span
@@ -1155,12 +1151,12 @@
                 >
                 <textarea
                   id="primaryTargetCustomer"
-                  maxlength="300"
                   required
                   placeholder="Be as specific as possible"
                 ></textarea>
                 <div class="char-count">
-                  <span id="primaryTargetCustomerCount">0</span>/300
+                  <span id="primaryTargetCustomerCount">0</span> words / 300
+                  words
                 </div>
                 <span class="error-message"
                   >Please tell us who your primary target customer is</span
@@ -1176,12 +1172,11 @@
                 >
                 <textarea
                   id="whyCustomersChoose"
-                  maxlength="300"
                   required
                   placeholder="Be as specific as possible"
                 ></textarea>
                 <div class="char-count">
-                  <span id="whyCustomersChooseCount">0</span>/300
+                  <span id="whyCustomersChooseCount">0</span> words / 300 words
                 </div>
                 <span class="error-message"
                   >Please tell us why customers will choose your solution over
@@ -1214,11 +1209,10 @@
                 <label>Is there anything else you would like us to know?</label>
                 <textarea
                   id="anythingElse"
-                  maxlength="300"
                   placeholder="Anything else you would like us to know"
                 ></textarea>
                 <div class="char-count">
-                  <span id="anythingElseCount">0</span>/300
+                  <span id="anythingElseCount">0</span> words / 300 words
                 </div>
               </div>
             </div>
@@ -1464,7 +1458,8 @@
                 <div class="next-step-content">
                   <h5>Build Phase</h5>
                   <p>
-                    Shortlisted teams work on and submit their MVP by March 1st.
+                    Shortlisted teams work on and submit their MVP by 19th
+                    March.
                   </p>
                 </div>
               </div>
@@ -1532,10 +1527,30 @@
           }
         };
 
-        const setFieldError = (field, hasError) => {
+        const countWords = (text) => {
+          return text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
+        };
+
+        const wordLimit = 300;
+        const textareasWithWordLimit = [
+          "problem",
+          "solution",
+          "whyYou",
+          "primaryTargetCustomer",
+          "whyCustomersChoose",
+          "anythingElse",
+        ];
+
+        const setFieldError = (field, hasError, errorMessage = null) => {
           const group = field.closest(".form-group");
           if (group) {
             group.classList.toggle("has-error", hasError);
+            if (errorMessage && hasError) {
+              const errorEl = group.querySelector(".error-message");
+              if (errorEl) {
+                errorEl.textContent = errorMessage;
+              }
+            }
           }
           field.classList.toggle("error", hasError);
         };
@@ -1554,10 +1569,14 @@
           } else {
             const value = field.value.trim();
             let fieldValid = true;
+            let errorMessage = null;
 
+            // Check if required field is empty
             if (field.hasAttribute("required") && !value) {
               fieldValid = false;
-            } else if (value) {
+            }
+            // Validate field value if it exists
+            else if (value) {
               if (field.type === "email") {
                 fieldValid = isValidEmail(value);
               } else if (field.type === "tel") {
@@ -1565,11 +1584,26 @@
               } else if (field.type === "url") {
                 fieldValid = isValidUrl(value);
               }
+
+              // Check word count for textareas with word limits (always check if value exists)
+              if (
+                field.tagName === "TEXTAREA" &&
+                textareasWithWordLimit.includes(field.id)
+              ) {
+                const wordCount = countWords(value);
+                if (wordCount > wordLimit) {
+                  fieldValid = false;
+                  errorMessage = `Please limit your response to ${wordLimit} words (currently ${wordCount} words)`;
+                }
+              }
             }
 
-            setFieldError(field, !fieldValid);
+            // Set error state
             if (!fieldValid) {
+              setFieldError(field, true, errorMessage);
               isValid = false;
+            } else {
+              setFieldError(field, false);
             }
           }
         });
@@ -1773,25 +1807,47 @@
         }
       }
 
-      // Character counters
-      document.querySelectorAll("textarea[maxlength]").forEach((textarea) => {
-        const countId = textarea.id + "Count";
+      // Word counters
+      function countWords(text) {
+        return text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
+      }
+
+      const wordLimit = 300;
+      const textareasWithCounters = [
+        "problem",
+        "solution",
+        "whyYou",
+        "primaryTargetCustomer",
+        "whyCustomersChoose",
+        "anythingElse",
+      ];
+
+      textareasWithCounters.forEach((textareaId) => {
+        const textarea = document.getElementById(textareaId);
+        const countId = textareaId + "Count";
         const countEl = document.getElementById(countId);
 
-        if (countEl) {
-          textarea.addEventListener("input", () => {
-            const count = textarea.value.length;
-            const max = parseInt(textarea.getAttribute("maxlength"));
-            countEl.textContent = count;
+        if (textarea && countEl) {
+          const updateWordCount = () => {
+            const text = textarea.value;
+            const wordCount = countWords(text);
+            countEl.textContent = wordCount;
 
             const parent = countEl.closest(".char-count");
             parent.classList.remove("warning", "error");
 
-            if (count >= max) {
+            // Show visual feedback but don't truncate
+            if (wordCount > wordLimit) {
               parent.classList.add("error");
-            } else if (count >= max * 0.8) {
+            } else if (wordCount >= wordLimit * 0.8) {
               parent.classList.add("warning");
             }
+          };
+
+          textarea.addEventListener("input", updateWordCount);
+          // Also validate on paste
+          textarea.addEventListener("paste", (e) => {
+            setTimeout(updateWordCount, 0);
           });
         }
       });

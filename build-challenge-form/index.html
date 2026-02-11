@@ -1185,6 +1185,23 @@
               </div>
             </div>
 
+            
+            <div class="form-row single">
+              <div class="form-group">
+                <label>Where are you in your journey? <span class="required">*</span></label>
+                <select id="whereInJourney" required>
+                    <option value="">Select...</option>
+                    <option value="Exploring ideas">Exploring ideas</option>
+                    <option value="Researching and validating">Researching and validating</option>
+                    <option value="Building the product">Building the product</option>
+                    <option value="Have launched the product">Have launched the product</option>
+                    <option value="Early sales">Early sales</option>
+                    <option value="Growing/Scaling">Growing/Scaling</option>
+                </select>
+                <span class="error-message">Please select where you are in your journey</span>
+              </div>
+            </div>
+
             <div class="form-row single">
               <div class="form-group">
                 <label
@@ -1458,8 +1475,7 @@
                 <div class="next-step-content">
                   <h5>Build Phase</h5>
                   <p>
-                    Shortlisted teams work on and submit their MVP by 19th
-                    March.
+                    Shortlisted teams work on and submit their MVP by April 11th.
                   </p>
                 </div>
               </div>
@@ -1672,6 +1688,7 @@
                 <p style="margin-bottom: 8px;"><strong>Why You:</strong> ${formData.whyYou}</p>
                 <p><strong>Primary Target Customer:</strong> ${formData.primaryTargetCustomer}</p>
                 <p><strong>Why Customers Choose:</strong> ${formData.whyCustomersChoose}</p>
+                <p><strong>Where are you in your journey:</strong> ${formData.whereInJourney}</p>
                 <p><strong>Business Model Canvas:</strong> ${formData.businessModelCanvas}</p>
                 <p><strong>Anything Else:</strong> ${formData.anythingElse}</p>
             `;
@@ -1718,6 +1735,7 @@
             document.getElementById("primaryTargetCustomer").value || "",
           whyCustomersChoose:
             document.getElementById("whyCustomersChoose").value || "",
+          whereInJourney: document.getElementById("whereInJourney").value || "",
           businessModelCanvas:
             document.getElementById("businessModelCanvas").value || "",
           anythingElse: document.getElementById("anythingElse").value || "",

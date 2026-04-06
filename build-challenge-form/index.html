@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -742,30 +742,65 @@
     </style>
 
     <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-PJXGLHGV');</script>
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-PJXGLHGV");
+    </script>
     <!-- End Google Tag Manager -->
 
     <!-- Meta Pixel Code -->
     <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '860166873299186');
-    fbq('track', 'PageView');
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js",
+      );
+      fbq("init", "860166873299186");
+      fbq("track", "PageView");
     </script>
     <!-- End Meta Pixel Code -->
 
     <!-- Clarity Code -->
-    <script type="text/javascript"> (function(c,l,a,r,i,t,y){ c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)}; t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i; y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y); })(window, document, "clarity", "script", "v0t1sfphfz"); </script>
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "v0t1sfphfz");
+    </script>
     <!-- End Clarity Code -->
   </head>
   <body>
@@ -1212,20 +1247,30 @@
               </div>
             </div>
 
-            
             <div class="form-row single">
               <div class="form-group">
-                <label>Where are you in your journey? <span class="required">*</span></label>
+                <label
+                  >Where are you in your journey?
+                  <span class="required">*</span></label
+                >
                 <select id="whereInJourney" required>
-                    <option value="">Select...</option>
-                    <option value="Exploring ideas">Exploring ideas</option>
-                    <option value="Researching and validating">Researching and validating</option>
-                    <option value="Building the product">Building the product</option>
-                    <option value="Have launched the product">Have launched the product</option>
-                    <option value="Early sales">Early sales</option>
-                    <option value="Growing/Scaling">Growing/Scaling</option>
+                  <option value="">Select...</option>
+                  <option value="Exploring ideas">Exploring ideas</option>
+                  <option value="Researching and validating">
+                    Researching and validating
+                  </option>
+                  <option value="Building the product">
+                    Building the product
+                  </option>
+                  <option value="Have launched the product">
+                    Have launched the product
+                  </option>
+                  <option value="Early sales">Early sales</option>
+                  <option value="Growing/Scaling">Growing/Scaling</option>
                 </select>
-                <span class="error-message">Please select where you are in your journey</span>
+                <span class="error-message"
+                  >Please select where you are in your journey</span
+                >
               </div>
             </div>
 
@@ -1502,7 +1547,8 @@
                 <div class="next-step-content">
                   <h5>Build Phase</h5>
                   <p>
-                    Shortlisted teams work on and submit their MVP by April 11th.
+                    Shortlisted teams work on and submit their MVP by April
+                    25th.
                   </p>
                 </div>
               </div>
@@ -1555,7 +1601,7 @@
       function validateStep(step) {
         let isValid = true;
         const section = document.querySelector(
-          `.form-section[data-section="${step}"]`
+          `.form-section[data-section="${step}"]`,
         );
 
         const isValidEmail = (value) =>
@@ -1604,7 +1650,7 @@
           if (field.type === "radio") {
             const name = field.name;
             const checked = section.querySelector(
-              `input[name="${name}"]:checked`
+              `input[name="${name}"]:checked`,
             );
             if (!checked) {
               isValid = false;
@@ -1704,8 +1750,8 @@
                 <p style="margin-bottom: 8px;"><strong>Team:</strong> ${
                   formData.teamName
                 } (${formData.teamSize} member${
-          formData.teamSize == "1" ? "" : "s"
-        })</p>
+                  formData.teamSize == "1" ? "" : "s"
+                })</p>
             `;
 
         ideaReview.innerHTML = `
@@ -1806,14 +1852,14 @@
         // Check if Zapier webhook URL is configured
         if (ZAPIER_WEBHOOK_URL === "YOUR_ZAPIER_WEBHOOK_URL_HERE") {
           alert(
-            "Error: Zapier webhook URL not configured. Please set ZAPIER_WEBHOOK_URL in the script."
+            "Error: Zapier webhook URL not configured. Please set ZAPIER_WEBHOOK_URL in the script.",
           );
           return;
         }
 
         // Get submit button and disable it
         const submitButton = document.querySelector(
-          'button[onclick="submitForm()"]'
+          'button[onclick="submitForm()"]',
         );
         const originalButtonText = submitButton.innerHTML;
         submitButton.disabled = true;
@@ -1840,10 +1886,11 @@
           currentStep = 5;
           updateProgress();
           window.scrollTo(0, 0);
+          history.pushState(null, "", "/thankyou");
         } catch (error) {
           console.error("Error submitting form:", error);
           alert(
-            "Failed to submit application. Please try again or contact support if the problem persists."
+            "Failed to submit application. Please try again or contact support if the problem persists.",
           );
 
           // Re-enable button
@@ -1902,8 +1949,14 @@
     </script>
 
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PJXGLHGV"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-PJXGLHGV"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
     <!-- End Google Tag Manager (noscript) -->
   </body>
 </html>

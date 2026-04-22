@@ -887,11 +887,11 @@
         </div>
 
         <div class="sidebar-content">
-          <h1>Technical Evaluation MVP Submission</h1>
+          <h1>HyKr Build Challenge – Build Phase MVP Submission</h1>
           <p class="sidebar-subtitle">
-            Please use this form to submit your MVP for the Technical
-            evaluation. Ensure all links are accessible and your submission is
-            complete before the deadline <strong>25 April 2026</strong>.
+            Use this form to submit your MVP for technical evaluation. Make sure
+            all links are accessible and everything is complete before
+            <strong>28th April 2026</strong>.
           </p>
 
           <div class="progress-steps">
@@ -946,12 +946,7 @@
           <div class="form-card">
             <h3 class="form-card-title"><span>👥</span> Your Team</h3>
 
-            <div class="form-row">
-              <div class="form-group">
-                <label>Team Name <span class="required">*</span></label>
-                <input type="text" id="teamName" required />
-                <span class="error-message">Please enter your team name</span>
-              </div>
+            <div class="form-row single">
               <div class="form-group">
                 <label
                   >Primary Founder / Contact Name
@@ -1151,7 +1146,7 @@
 
           <div class="form-card">
             <h3 class="form-card-title">
-              <span>💻</span> Code & Documentation
+              <span>📄</span> Code & Documentation
             </h3>
 
             <div class="form-row single">
@@ -1290,7 +1285,7 @@
 
           <div class="form-card">
             <h3 class="form-card-title">
-              <span>🧪</span> Product Quality & Stability
+              <span>💻</span> Product Quality & Stability
             </h3>
 
             <div class="form-group">
@@ -1487,7 +1482,7 @@
           </div>
 
           <div class="form-card">
-            <h3 class="form-card-title"><span>🧪</span> Quality & Progress</h3>
+            <h3 class="form-card-title"><span>💻</span> Quality & Progress</h3>
             <div id="reviewQuality"></div>
           </div>
 
@@ -1578,15 +1573,24 @@
       let currentStep = 1;
       const totalSteps = 5;
 
-      // Capture the "id" query param on load and strip it from the URL so it
-      // isn't retained on refresh/share. It's kept in memory and attached to
+      // Capture personalization query params (id, name, email, mobile) on load
+      // and strip them from the URL so they aren't retained on refresh/share.
+      // Values are kept in memory, used to pre-fill the form, and attached to
       // the submission payload.
-      const submissionId = (() => {
+      const urlParams = (() => {
+        const consumed = { id: "", name: "", email: "", mobile: "" };
         try {
           const params = new URLSearchParams(window.location.search);
-          const id = params.get("id");
-          if (id !== null) {
-            params.delete("id");
+          let changed = false;
+          Object.keys(consumed).forEach((key) => {
+            const val = params.get(key);
+            if (val !== null) {
+              consumed[key] = val;
+              params.delete(key);
+              changed = true;
+            }
+          });
+          if (changed) {
             const cleanedSearch = params.toString();
             const newUrl =
               window.location.pathname +
@@ -1594,9 +1598,36 @@
               window.location.hash;
             history.replaceState(null, "", newUrl);
           }
-          return id || "";
-        } catch (_) {
-          return "";
+        } catch (_) {}
+        return consumed;
+      })();
+      const submissionId = urlParams.id;
+
+      // Normalize an incoming mobile number into the "+91 XXXXXXXXXX" format
+      // the phone validator expects. Accepts "+91XXXXXXXXXX", "91XXXXXXXXXX",
+      // or a bare 10-digit number; returns the raw input otherwise.
+      function normalizeIndianMobile(raw) {
+        if (!raw) return "";
+        const stripped = String(raw).trim().replace(/\s+/g, "");
+        const match = stripped.match(/^(?:\+?91)?(\d{10})$/);
+        if (match) return "+91 " + match[1];
+        return String(raw);
+      }
+
+      // Pre-fill form fields from URL-supplied values. Script runs at end of
+      // body, so form fields already exist in the DOM.
+      (function prefillFromUrl() {
+        const contactName = document.getElementById("contactName");
+        const emailEl = document.getElementById("email");
+        const phoneEl = document.getElementById("phone");
+        if (contactName && urlParams.name) {
+          contactName.value = urlParams.name;
+        }
+        if (emailEl && urlParams.email) {
+          emailEl.value = urlParams.email;
+        }
+        if (phoneEl && urlParams.mobile) {
+          phoneEl.value = normalizeIndianMobile(urlParams.mobile);
         }
       })();
 
@@ -1783,7 +1814,6 @@
         const formData = collectFormData();
 
         document.getElementById("reviewTeam").innerHTML =
-          renderReviewItem("Team Name", formData.teamName) +
           renderReviewItem("Primary Contact", formData.contactName) +
           renderReviewItem("Email", formData.email) +
           renderReviewItem("Phone", formData.phone);
@@ -1826,7 +1856,6 @@
 
         return {
           // Team
-          teamName: document.getElementById("teamName").value,
           contactName: document.getElementById("contactName").value,
           email: document.getElementById("email").value,
           phone: document.getElementById("phone").value,

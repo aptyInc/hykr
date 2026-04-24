@@ -969,12 +969,11 @@
                 <input
                   type="tel"
                   id="phone"
-                  placeholder="+91 1234567890"
+                  placeholder="10-digit mobile number"
                   required
                 />
                 <span class="error-message"
-                  >Please enter a valid phone number in this format +91
-                  1234567890</span
+                  >Please enter a valid 10-digit mobile number</span
                 >
               </div>
             </div>
@@ -1603,15 +1602,15 @@
       })();
       const submissionId = urlParams.id;
 
-      // Normalize an incoming mobile number into the "+91 XXXXXXXXXX" format
-      // the phone validator expects. Accepts "+91XXXXXXXXXX", "91XXXXXXXXXX",
-      // or a bare 10-digit number; returns the raw input otherwise.
+      // Extract a 10-digit mobile number from whatever format the URL gives
+      // us (e.g., "+91 9876543210", "919876543210", "9876543210"). Returns the
+      // last 10 digits of the cleaned string, or an empty string if fewer than
+      // 10 digits are present.
       function normalizeIndianMobile(raw) {
         if (!raw) return "";
-        const stripped = String(raw).trim().replace(/\s+/g, "");
-        const match = stripped.match(/^(?:\+?91)?(\d{10})$/);
-        if (match) return "+91 " + match[1];
-        return String(raw);
+        const digitsOnly = String(raw).replace(/\D/g, "");
+        if (digitsOnly.length < 10) return "";
+        return digitsOnly.slice(-10);
       }
 
       // Pre-fill form fields from URL-supplied values. Script runs at end of
@@ -1674,7 +1673,7 @@
 
         const isValidEmail = (value) =>
           /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-        const isValidPhone = (value) => /^\+91\s\d{10}$/.test(value);
+        const isValidPhone = (value) => /^\d{10}$/.test(value);
         const isValidUrl = (value) => {
           try {
             const url = new URL(value);

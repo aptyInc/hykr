@@ -1098,10 +1098,14 @@
               </div>
               <div class="form-group">
                 <label>Phone Number <span class="required">*</span></label>
-                <input type="tel" id="phone" placeholder="+91" required />
+                <input
+                  type="tel"
+                  id="phone"
+                  placeholder="10-digit mobile number"
+                  required
+                />
                 <span class="error-message"
-                  >Please enter a valid phone number in this format +91
-                  1234567890</span
+                  >Please enter a valid 10-digit mobile number</span
                 >
               </div>
             </div>
@@ -1793,6 +1797,37 @@
       let currentStep = 1;
       const totalSteps = 4;
 
+      // Capture the "source" query param (hidden from UI, sent with submission).
+      // Persist it in localStorage so an accidental refresh doesn't lose it,
+      // then strip it from the URL. On a fresh load without the param we fall
+      // back to whatever was previously stored.
+      const SOURCE_STORAGE_KEY = "hykr_source";
+      const trackingSource = (() => {
+        let source = "";
+        try {
+          const params = new URLSearchParams(window.location.search);
+          const fromUrl = params.get("source");
+          if (fromUrl !== null && fromUrl !== "") {
+            source = fromUrl;
+            try {
+              localStorage.setItem(SOURCE_STORAGE_KEY, source);
+            } catch (_) {}
+            params.delete("source");
+            const cleanedSearch = params.toString();
+            const newUrl =
+              window.location.pathname +
+              (cleanedSearch ? "?" + cleanedSearch : "") +
+              window.location.hash;
+            history.replaceState(null, "", newUrl);
+          } else {
+            try {
+              source = localStorage.getItem(SOURCE_STORAGE_KEY) || "";
+            } catch (_) {}
+          }
+        } catch (_) {}
+        return source;
+      })();
+
       function updateProgress() {
         document.querySelectorAll(".progress-step").forEach((step, index) => {
           const stepNum = index + 1;
@@ -1821,7 +1856,7 @@
 
         const isValidEmail = (value) =>
           /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-        const isValidPhone = (value) => /^\+91\s\d{10}$/.test(value);
+        const isValidPhone = (value) => /^\d{10}$/.test(value);
         const isValidUrl = (value) => {
           try {
             const url = new URL(value);
@@ -2042,6 +2077,9 @@
             document.getElementById("commitmentAccept").checked,
           eligibilityAccepted:
             document.getElementById("eligibilityAccept").checked,
+
+          // Tracking
+          source: trackingSource,
 
           // Timestamp
           submittedAt: new Date().toISOString(),

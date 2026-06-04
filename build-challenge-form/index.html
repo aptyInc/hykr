@@ -874,6 +874,101 @@
         font-style: normal;
         font-display: swap;
       }
+
+      /* Applications closed screen */
+      .register-layout {
+        display: none;
+      }
+      .closed-screen {
+        min-height: 100vh;
+        background: var(--off-white);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 24px;
+        text-align: center;
+        color: var(--gray-900);
+      }
+      .closed-screen h1 {
+        font-size: clamp(32px, 5vw, 48px);
+        color: var(--deep-purple);
+        margin-bottom: 32px;
+      }
+      .closed-card {
+        background: #ece9fd;
+        border-radius: 24px;
+        padding: 40px 44px;
+        max-width: 640px;
+        width: 100%;
+        text-align: left;
+        box-shadow: 0 20px 50px rgba(43, 57, 255, 0.08);
+      }
+      .closed-card-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .closed-card-header svg {
+        width: 28px;
+        height: 28px;
+        flex-shrink: 0;
+        color: var(--deep-purple);
+      }
+      .closed-card-header h2 {
+        font-size: 24px;
+        color: var(--gray-900);
+      }
+      .closed-card p {
+        font-size: 18px;
+        line-height: 1.7;
+        color: var(--gray-800);
+        margin: 0;
+      }
+      .closed-card p + p {
+        margin-top: 4px;
+      }
+      .closed-actions {
+        margin-top: 36px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+      .closed-btn {
+        display: inline-block;
+        background: var(--brand-blue);
+        color: var(--white);
+        font-family: var(--font-display);
+        font-size: 18px;
+        font-weight: 600;
+        padding: 18px 40px;
+        border-radius: 999px;
+        transition:
+          transform 0.15s ease,
+          background 0.15s ease;
+      }
+      .closed-btn:hover {
+        background: #1f2bd6;
+        transform: translateY(-1px);
+      }
+      .closed-link {
+        color: var(--brand-blue);
+        text-decoration: underline;
+        font-size: 16px;
+      }
+      .closed-link:hover {
+        opacity: 0.8;
+      }
+      @media (max-width: 600px) {
+        .closed-card {
+          padding: 28px 22px;
+        }
+        .closed-card p {
+          font-size: 16px;
+        }
+      }
     </style>
 
     <!-- Google Tag Manager -->
@@ -1001,6 +1096,48 @@
       />
     </noscript>
     <!-- End LinkedIn (noscript) -->
+
+    <!-- Applications closed -->
+    <div class="closed-screen">
+      <h1>HyKr Build Challenge 2026</h1>
+      <div class="closed-card">
+        <div class="closed-card-header">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          <h2>Applications closed</h2>
+        </div>
+        <p>Hello!</p>
+        <p>Thank you for your interest in our challenge.</p>
+        <p>
+          You just missed this round. Applications are now closed, and our jury
+          is currently evaluating the submitted entries.
+        </p>
+        <p>
+          Please watch this space, we'll be back soon with the next edition.
+        </p>
+        <br />
+        <p>Best regards,</p>
+        <p>The HyKr Team.</p>
+      </div>
+      <div class="closed-actions">
+        <a
+          href="https://hykr.studio/"
+          target="_blank"
+          rel="noopener"
+          class="closed-link"
+          >Visit HyKr Studio</a
+        >
+      </div>
+    </div>
 
     <div class="register-layout">
       <!-- Sidebar -->
